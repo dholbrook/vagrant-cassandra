@@ -4,6 +4,10 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+ADDRESS = "192.168.200.11"
+SEEDS = []
+SEEDS << ADDRESS
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = "11.6.2"
 
@@ -22,6 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
 
+
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
@@ -29,7 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network :private_network, ip: "192.168.33.10"
+  config.vm.network :private_network, ip: ADDRESS
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -93,6 +99,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.data_bags_path = "chef/data_bags"
     chef.add_recipe "apt"  
     chef.add_recipe "java"
+    chef.add_recipe "cassandra::tarball"
     chef.json = {
       :java =>  {
         'install_flavor' => 'oracle',
@@ -100,7 +107,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'oracle' => {
           'accept_oracle_download_terms' => true
         }
-      }
+      },
+      :cassandra => {
+        'version' => '2.0.3',
+        'seeds' => SEEDS,
+        'listen_address' => ADDRESS,
+        'rpc_address' => ADDRESS,        
+      }  
     }
   end
 
