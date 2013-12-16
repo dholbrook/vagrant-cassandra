@@ -9,7 +9,7 @@ SEEDS << ADDRESS
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
-  config.omnibus.chef_version = "11.6.2"
+  config.omnibus.chef_version = "11.8.2"
 
   config.vm.box = "opscode_ubuntu_1204_chef"
   config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
