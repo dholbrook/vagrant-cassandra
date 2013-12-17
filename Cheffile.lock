@@ -6,7 +6,7 @@ SITE
     aws (1.0.0)
     chef_handler (1.1.4)
     firewall (0.11.2)
-    java (1.16.0)
+    java (1.16.4)
       aws (>= 0.0.0)
       windows (>= 0.0.0)
     ufw (0.7.0)
@@ -18,7 +18,7 @@ SITE
 GIT
   remote: https://github.com/michaelklishin/cassandra-chef-cookbook
   ref: master
-  sha: 667a24c0934876f0b2027d42cd699dfea73e3a24
+  sha: 13723608d6f761ffff4bc4fabcf8bafa003e28ca
   specs:
     cassandra (2.0.0)
       apt (>= 0.0.0)

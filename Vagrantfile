@@ -49,6 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         chef.data_bags_path = "chef/data_bags"
         chef.add_recipe "apt"  
         chef.add_recipe "java"
+        chef.add_recipe "ufw::disable"
         chef.add_recipe "cassandra::tarball"
         chef.json = {
           :java =>  {
