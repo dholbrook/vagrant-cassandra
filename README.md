@@ -40,3 +40,6 @@ The first time you use this you need to installed the required chef recipes with
     Use HELP for help.
     cqlsh>    
     
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dholbrook/vagrant-cassandra/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
