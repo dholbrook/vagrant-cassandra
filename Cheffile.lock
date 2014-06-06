@@ -6,7 +6,7 @@ SITE
     aws (1.0.0)
     chef_handler (1.1.4)
     firewall (0.11.2)
-    java (1.16.4)
+    java (1.22.0)
       aws (>= 0.0.0)
       windows (>= 0.0.0)
     ufw (0.7.0)
