@@ -18,16 +18,17 @@ I borrowed ideas from an earlier project on github [vagrant-cassandra](https://g
 The first time you use this you need to installed the required chef recipes with `librarian-chef`.
 
     $librarian-chef install
-    Installing apt (2.3.0)
-    Installing ark (0.4.0)
-    Installing aws (1.0.0)
-    Installing chef_handler (1.1.4)
-    Installing firewall (0.11.2)
-    Installing windows (1.11.0)
-    Installing java (1.16.4)
-    Installing ufw (0.7.0)
-    Installing yum (3.0.0)
-    Installing cassandra (2.0.0)
+	Installing chef_handler (1.1.6)
+	Installing windows (1.34.2)
+	Installing 7-zip (1.0.2)
+	Installing apt (2.6.0)
+	Installing ark (0.9.0)
+	Installing java (1.28.0)
+	Installing ulimit (0.3.2)
+	Installing yum (3.3.2)
+	Installing cassandra (2.7.0)
+	Installing firewall (0.11.8)
+	Installing ufw (0.7.4)
     
 After that you should be able to interact with the Cassandra nodes.
  
