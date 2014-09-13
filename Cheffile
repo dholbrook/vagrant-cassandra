@@ -3,9 +3,10 @@
 
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'apt'
-cookbook 'ufw'
-cookbook 'java'
+cookbook 'apt', '>= 2.6.0'
+cookbook 'ufw', '>= 0.7.4'
+cookbook 'java', '>= 1.28.0'
 
 cookbook 'cassandra',
-    :git => 'https://github.com/michaelklishin/cassandra-chef-cookbook'
+    :git => 'https://github.com/michaelklishin/cassandra-chef-cookbook',
+    :ref => 'v2.7.0'

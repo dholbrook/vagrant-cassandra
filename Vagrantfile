@@ -4,15 +4,17 @@
 VAGRANTFILE_API_VERSION = "2"
 INSTANCES = 3
 
-BOX = "opscode_ubuntu_1204_chef"
-BOX_URL = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box"
+BOX = "opscode_ubuntu-14.04_chef-provisionerless"
+BOX_URL = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
 
-CHEF_VERSION = "11.8.2"
+CHEF_VERSION = "11.16.0"
 
-MEMORY = 512
+MEMORY = 1024
 
 DOMAIN = "test.io"
 SUBNET = "192.168.200"
+
+CLUSTER_NAME = "Test Cluster"
 
 SEEDS = []
 NODES = []
@@ -44,13 +46,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--memory", MEMORY]
       end
       node.vm.provision :chef_solo do |chef|
+        chef.custom_config_path = "Vagrantfile.chef"
         chef.cookbooks_path = ["chef/cookbooks", "chef/site-cookbooks"]
         chef.roles_path = "chef/roles"
         chef.data_bags_path = "chef/data_bags"
         chef.add_recipe "apt"  
         chef.add_recipe "java"
         chef.add_recipe "ufw::disable"
-        chef.add_recipe "cassandra::tarball"
+        chef.add_recipe "cassandra::datastax"
         chef.json = {
           :java =>  {
             'install_flavor' => 'oracle',
@@ -60,14 +63,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             }
           },
           :cassandra => {
-            'version' => '2.0.3',
+            'version' => '2.0.9',
             'seeds' => SEEDS,
             'listen_address' => n['addr'],
-            'rpc_address' => n['addr'],
-            'vnodes' => VNODES        
+            'broadcast_address' => n['addr'],
+            'rpc_address' => '0.0.0.0',
+            'vnodes' => VNODES,
+            'cluster_name' => CLUSTER_NAME  
           }  
         }        
       end
+      # Bind port configuration not detected until restart for unknown reasons
+      # use shell provisioner as workaround
+      node.vm.provision :shell, :inline => "sudo service cassandra restart"
     end
   end
 end
