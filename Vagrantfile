@@ -2,18 +2,16 @@
 # vi: set ft=ruby :
 
 VAGRANTFILE_API_VERSION = "2"
-INSTANCES = 3
+CASSANDRA_VERSION = "2.1.0"
+CHEF_VERSION = "11.16.0"
 
 BOX = "opscode_ubuntu-14.04_chef-provisionerless"
 BOX_URL = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
 
-CHEF_VERSION = "11.16.0"
-
+INSTANCES = 3
 MEMORY = 1024
-
-DOMAIN = "test.io"
+DOMAIN = "example.org"
 SUBNET = "192.168.200"
-
 CLUSTER_NAME = "Test Cluster"
 
 SEEDS = []
@@ -53,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         chef.add_recipe "apt"  
         chef.add_recipe "java"
         chef.add_recipe "ufw::disable"
-        chef.add_recipe "cassandra::datastax"
+        chef.add_recipe "cassandra::tarball"
         chef.json = {
           :java =>  {
             'install_flavor' => 'oracle',
@@ -63,7 +61,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             }
           },
           :cassandra => {
-            'version' => '2.0.9',
+            'version' => CASSANDRA_VERSION,
             'seeds' => SEEDS,
             'listen_address' => n['addr'],
             'broadcast_address' => n['addr'],
@@ -75,7 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
       # Bind port configuration not detected until restart for unknown reasons
       # use shell provisioner as workaround
-      node.vm.provision :shell, :inline => "sudo service cassandra restart"
+      # node.vm.provision :shell, :inline => "sudo service cassandra restart"
     end
   end
 end

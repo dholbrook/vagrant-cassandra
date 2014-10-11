@@ -2,7 +2,7 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     7-zip (1.0.2)
-      windows (>= 0.0.0)
+      windows (>= 1.2.2)
     apt (2.6.0)
     ark (0.9.0)
       7-zip (>= 0.0.0)
@@ -13,16 +13,16 @@ SITE
     ufw (0.7.4)
       firewall (>= 0.9.0)
     ulimit (0.3.2)
-    windows (1.34.2)
+    windows (1.34.6)
       chef_handler (>= 0.0.0)
     yum (3.3.2)
 
 GIT
   remote: https://github.com/michaelklishin/cassandra-chef-cookbook
-  ref: v2.7.0
-  sha: 95a9734a779bb5c4f09ecf3259d7e3693b4ceb9d
+  ref: v2.8.0
+  sha: 1bc7be527468764345ea2eb77daae9a921a12c17
   specs:
-    cassandra (2.7.0)
+    cassandra (2.8.0)
       apt (>= 0.0.0)
       ark (>= 0.0.0)
       java (>= 0.0.0)

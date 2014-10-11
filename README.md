@@ -26,29 +26,36 @@ The first time you use this you need to installed the required chef recipes with
 	Installing java (1.28.0)
 	Installing ulimit (0.3.2)
 	Installing yum (3.3.2)
-	Installing cassandra (2.7.0)
+	Installing cassandra (2.8.0)
 	Installing firewall (0.11.8)
 	Installing ufw (0.7.4)
     
 After that you should be able to interact with the Cassandra nodes.
  
-	vagrant@node2:~$ cqlsh
-	Connected to Test Cluster at localhost:9160.
-	[cqlsh 4.1.1 | Cassandra 2.0.9 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
-	Use HELP for help.
-	cqlsh> 
+    vagrant@node2:~$ cqlsh
+    Connected to Test Cluster at 127.0.0.1:9042.
+    [cqlsh 5.0.1 | Cassandra 2.1.0 | CQL spec 3.2.0 | Native protocol v3]
+    Use HELP for help.
+    cqlsh>
 	
-	vagrant@node2:~$ nodetool status
-	Datacenter: datacenter1
-	=======================
-	Status=Up/Down
-	|/ State=Normal/Leaving/Joining/Moving
-	--  Address         Load       Tokens  Owns (effective)  Host ID                               Rack
-	UN  192.168.200.11  77.9 KB    256     63.9%             f54bd369-452e-4474-bae3-69b564b1c0c7  rack1
-	UN  192.168.200.13  85.45 KB   256     67.8%             739ee255-0436-4c28-aae4-c8c6fc9a2c7b  rack1
-	UN  192.168.200.12  60.11 KB   256     68.4%             f2561d69-2f5c-423b-8a93-16d39177ea59  rack1
+    vagrant@node2:~$ /usr/local/cassandra/bin/nodetool status
+    Datacenter: datacenter1
+    =======================
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address         Load       Tokens  Owns (effective)  Host ID                               Rack
+    UN  192.168.200.11  54.88 KB   256     65.6%             9d3e59d5-27b8-4d45-9ac1-1e1b3a9c6df1  rack1
+    UN  192.168.200.13  111.8 KB   256     66.9%             c8e91f28-42d2-452e-8b27-311e70b34987  rack1
+    UN  192.168.200.12  122.65 KB  256     67.4%             f5ceccc8-3e40-406b-9a7c-92c1b6cb4bb5  rack1
     
 ##Changelog
+
+**2014-10-11**
+
+* upgrade cassandra-chef-cookbook to 2.8.0
+* set cassandra version to 2.1.0
+* switch back to cassandra::tarball
+* remove cassandra restart post provisioner
 
 **2014-09-13**
 
@@ -58,10 +65,8 @@ After that you should be able to interact with the Cassandra nodes.
 * upgrade java from 1.7.0\_51 to 1.7.0\_67
 * increased RAM from 512 to 1024
 * switch from cassandra::tarball to cassandra::datastax
-* add apache2 licence
+* add apache2 license
 * add explicit versions to Cheffile
 * add `ssl_verify_mode = :verify_peer` configuration to remove chef warning
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dholbrook/vagrant-cassandra/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

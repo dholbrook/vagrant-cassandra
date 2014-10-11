@@ -9,4 +9,4 @@ cookbook 'java', '>= 1.28.0'
 
 cookbook 'cassandra',
     :git => 'https://github.com/michaelklishin/cassandra-chef-cookbook',
-    :ref => 'v2.7.0'
+    :ref => 'v2.8.0'
